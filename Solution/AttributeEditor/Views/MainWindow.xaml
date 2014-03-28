@@ -1,0 +1,56 @@
+﻿<Window x:Class="AttributeEditor.Views.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+	Title="{Binding Path=File.Path, StringFormat='Attribute Editor - {0}', FallbackValue='Attribute Editor'}" Height="400" Width="600" AllowDrop="True" DragOver="Window_DragOver" Drop="Window_Drop">
+	<Grid Margin="10">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="200"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="5"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<StackPanel Grid.Row="0" Grid.Column="0">
+			<TextBlock Text="Creation Time:" ToolTip="The date and time the file was created."/>
+			<xctk:DateTimePicker x:Name="DateTimeCreation" Value="{Binding Path=File.CreationTime}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,2,0,0" ToolTip="The date and time the file was created."/>
+			<TextBlock Text="Last Access Time:" ToolTip="The date and time the file was last accessed."/>
+			<xctk:DateTimePicker x:Name="DateTimeAccess" Value="{Binding Path=File.LastAccessTime}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,2,0,0" ToolTip="The date and time the file was last accessed."/>
+			<TextBlock Text="Last Write Time:" ToolTip="The date and time the file was last written to."/>
+			<xctk:DateTimePicker x:Name="DateTimeWrite" Value="{Binding Path=File.LastWriteTime}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,2,0,0" ToolTip="The date and time the file was last written to."/>
+		</StackPanel>
+		<Grid Grid.Row="0" Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*" MaxHeight="262"/>
+			</Grid.RowDefinitions>
+			<TextBlock Grid.Row="0" Text="File Attributes:" ToolTip="Attributes associated with the file."/>
+			<Border Grid.Row="1" BorderThickness="1" BorderBrush="#80000000">
+				<ScrollViewer VerticalScrollBarVisibility="Auto">
+					<StackPanel x:Name="StackPanelAttributes" Margin="2">
+						<CheckBox x:Name="CheckBoxAttNormal" IsChecked="{Binding Path=File.Attributes.Normal}" Content="Normal" ToolTip="The file is a standard file that has no special attributes." Checked="CheckBoxAttNormal_Checked"/>
+						<CheckBox x:Name="CheckBoxAttArchive" IsChecked="{Binding Path=File.Attributes.Archive}" Content="Archive" ToolTip="The file is a candidate for backup or removal." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttCompressed" IsChecked="{Binding Path=File.Attributes.Compressed}" Content="Compressed" ToolTip="The file is compressed." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttDevice" IsChecked="{Binding Path=File.Attributes.Device}" Content="Device" ToolTip="Reserved for future use." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttDirectory" IsChecked="{Binding Path=File.Attributes.Directory}" Content="Directory" ToolTip="The file is a directory." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttEncrypted" IsChecked="{Binding Path=File.Attributes.Encrypted}" Content="Encrypted" ToolTip="All data in the file is encrypted." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttHidden" IsChecked="{Binding Path=File.Attributes.Hidden}" Content="Hidden" ToolTip="The file is hidden, and thus is not included in an ordinary directory listing." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttIntegrityStream" IsChecked="{Binding Path=File.Attributes.IntegrityStream}" Content="Integrity Stream" ToolTip="The file includes data integrity support." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttNoScrubData" IsChecked="{Binding Path=File.Attributes.NoScrubData}" Content="No Scrub Data" ToolTip="The file is excluded from the data integrity scan." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttNotContentIndexed" IsChecked="{Binding Path=File.Attributes.NotContentIndexed}" Content="Not Content Indexed" ToolTip="The file will not be indexed by the operating system's content indexing service." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttOffline" IsChecked="{Binding Path=File.Attributes.Offline}" Content="Offline" ToolTip="The file is offline. The data of the file is not immediately available." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttReadOnly" IsChecked="{Binding Path=File.Attributes.ReadOnly}" Content="Read-Only" ToolTip="The file is read-only." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttReparsePoint" IsChecked="{Binding Path=File.Attributes.ReparsePoint}" Content="Reparse Point" ToolTip="The file contains a reparse point, which is a block of user-defined data associated with a file or a directory." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttSparseFile" IsChecked="{Binding Path=File.Attributes.SparseFile}" Content="Sparse File" ToolTip="The file is a sparse file. Sparse files are typically large files whose data consists of mostly zeros." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttSystem" IsChecked="{Binding Path=File.Attributes.System}" Content="System" ToolTip="The file is a system file. That is, the file is part of the operating system or is used exclusively by the operating system." Checked="CheckBoxAttOthers_Checked"/>
+						<CheckBox x:Name="CheckBoxAttTemporary" IsChecked="{Binding Path=File.Attributes.Temporary}" Content="Temporary" ToolTip="The file is temporary. A temporary file contains data that is needed while an application is executing but is not needed after the application is finished." Checked="CheckBoxAttOthers_Checked"/>
+					</StackPanel>
+				</ScrollViewer>
+			</Border>
+		</Grid>
+		<Button x:Name="ButtonSave" Grid.Row="2" Grid.ColumnSpan="2" Content="Save" Click="ButtonSave_Click"/>
+
+	</Grid>
+</Window>
